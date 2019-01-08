@@ -10,7 +10,11 @@ This project shows different recipes to run a Java EE application using Kubernet
 == Chapter 1 : Kubernetes Concepts and Architecture
 Kubernetes (k8s) is an open-source system for automating deployment, scaling, and management of containerized applications
 
+.Kubernetes Architecture
+image::images/Kubernetes-Architecture.png[]
+
 Kubernetes has four main components:
+
 * Client 
 * Master
 * Worker Nodes
@@ -45,5 +49,3 @@ Services on node include:
 *Service*: 
 Single, stable name for a set of pods, also acts as load balancer
 
-.Kubernetes Architecture
-image::images/Kubernetes-Architecture.png[]

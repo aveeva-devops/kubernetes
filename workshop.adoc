@@ -21,4 +21,4 @@ Key concepts of Kubernetes are explained below:
 . *Kubelet*: It runs on each node in the cluster and is responsible for node level pod management.
 
 .Kubernetes Architecture
-image::images/kubernetes-architecture.png[]
+image::images/Kubernetes-Architecture.png[]

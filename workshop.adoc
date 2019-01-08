@@ -1,5 +1,6 @@
 = Kubernetes Workshop
-toc::[]
+
+:toc:
 
 == Chapter 1 : Kubernetes Concepts and Architecture
 == Chapter 2 : Create Kubernetes Cluster 

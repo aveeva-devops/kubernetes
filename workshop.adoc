@@ -8,6 +8,14 @@ toc::[]
 This project shows different recipes to run a Java EE application using Kubernetes.
 
 == Chapter 1 : Kubernetes Concepts and Architecture
+== Chapter 2 : Create Kubernetes Cluster 
+== Chapter 3 : Manage Pod
+== Chapter 4 : Manage Replication Controller
+== Chapter 5 : Rolling Updates
+== Chapter 6 : Manage Service
+== Chapter 7 : Kubernetes Volumes
+== Chapter 8 : Kubernetes Application Health Checks
+
 Kubernetes (k8s) is an open-source system for automating deployment, scaling, and management of containerized applications
 
 image::images/Kubernetes-Architecture.png[]

@@ -42,7 +42,7 @@ Services on node include:
 . *Kubelet*: It runs on each node in the cluster and is responsible for node level pod management.
 . *DNS*: Cluster DNS is a DNS server, in addition to the other DNS server(s) in your environment, which serves DNS records for Kubernetes services. Containers started by Kubernetes automatically include this DNS server in their DNS searches
 . *Web UI*: Dashboard is a general purpose, web-based UI for Kubernetes clusters
-. * Kube-Proxy*: kube-proxy enables the Kubernetes service abstraction by maintaining network rules on the host and performing connection forwarding
+. *Kube-Proxy*: kube-proxy enables the Kubernetes service abstraction by maintaining network rules on the host and performing connection forwarding
 
 *Service*: Single, stable name for a set of pods, also acts as load balancer
 

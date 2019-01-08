@@ -5,7 +5,7 @@
 
 toc::[]
 
-== Chapter 1 : Kubernetes Concepts and Architecture
+= Chapter 1 : Kubernetes Concepts and Architecture
 == Chapter 2 : Create Kubernetes Cluster 
 == Chapter 3 : Manage Pod
 == Chapter 4 : Manage Replication Controller

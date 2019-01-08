@@ -1,6 +1,7 @@
 = Kubernetes Workshop
-
 :toc:
+:toclevels: 3
+:toc-placement!:
 
 toc::[]
 

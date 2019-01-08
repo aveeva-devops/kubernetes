@@ -7,7 +7,7 @@ toc::[]
 
 This project shows different recipes to run a Java EE application using Kubernetes.
 
-== Kubernetes Concepts
+== Chapter 1 : Kubernetes Concepts and Architecture
 
 Key concepts of Kubernetes are explained below:
 

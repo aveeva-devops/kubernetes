@@ -11,6 +11,14 @@ This project shows different recipes to run a Java EE application using Kubernet
 
 Key concepts of Kubernetes are explained below:
 
+Kubernetes has three main components.
+
+* Client 
+* Master
+* Worker Nodes
+
+#### Client
+
 . *Pods*: Collocated group of Docker containers that share an IP and storage volume
 . *Service*: Single, stable name for a set of pods, also acts as load balancer
 . *Replication Controller*: Manages the lifecycle of pods and ensures specified number are running

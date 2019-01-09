@@ -55,3 +55,18 @@ Services on node include:
 *Service*: 
 Single, stable name for a set of pods, also acts as load balancer
 
+== Create Kubernetes Cluster
+
+=== Using Minikube
+
+This will create a one node development cluster.
+
+. Download https://github.com/kubernetes/minikube/releases[latest minikube release]
+. Download http://kubernetes.io/docs/getting-started-guides/minikube/#install-kubectl[latest kubectl]
+. Move both binaries in the same directory and include that directory in the `PATH`.
+. Start Kubernetes one node cluster:
++
+  minikube start
++
+Detailed instructions: http://kubernetes.io/docs/getting-started-guides/minikube/
+

@@ -11,7 +11,7 @@ toc::[]
 == Chapter 7 : Kubernetes Volumes
 == Chapter 8 : Kubernetes Application Health Checks
 
-## Kubernetes Concepts and Architecture
+## Chapter 1: Kubernetes Concepts and Architecture
 Kubernetes (k8s) is an open-source system for automating deployment, scaling, and management of containerized applications
 
 image::images/Kubernetes-Architecture.png[]

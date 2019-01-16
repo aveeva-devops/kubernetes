@@ -52,7 +52,7 @@ Services on node include:
 *Service*: 
 Single, stable name for a set of pods, also acts as load balancer
 
-== Create Kubernetes Cluster
+## Chapter 2: Create Kubernetes Cluster
 
 === Using Minikube
 
@@ -66,4 +66,24 @@ This will create a one node development cluster.
   minikube start
 +
 Detailed instructions: http://kubernetes.io/docs/getting-started-guides/minikube/
+
+=== Using Kops on Amazon Web Services
+
+Below exercise will create a one master and two worker nodes cluster on AWS.
+
+==== Configure Client on Mac
+
+* install Kops: 
+```
+brew update
+brew install kops 
+```
+
+* Install kubectl
+```
+brew install kubectl
+```
+Check Kops version kops version. Make sure its 1.6.2 at least.
+
+
 

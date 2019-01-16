@@ -117,13 +117,13 @@ export AWS_ACCESS_KEY_ID=<KEY>
 export AWS_SECRET_ACCESS_KEY=<KEY>
 ```
 +
-. Create S3 bucket: `aws s3api create-bucket --bucket kubernetes-arungupta-me --region us-west-2`
+. Create S3 bucket: `aws s3api create-bucket --bucket kubernetes-devops-me --region us-west-2`
 . Enable bucket versioning: `aws s3api put-bucket-versioning --bucket kubernetes-devops-me --region us-west-2 --versioning-configuration Status=Enabled`
 . Set S3 bucket: `export KOPS_STATE_STORE=s3://kubernetes-devops-me`
 
 ==== Configure One master and two nodes Cluster on AWS
 
-. Set cluster name: `export NAME=cluster.k8s.local`
+. Set cluster name: `export NAME=cluster.k8s.devops`
 . Start Kubernetes cluster on AWS
 +
 ```
@@ -182,9 +182,9 @@ nodes     Node  t2.medium 2 2 us-east-1a
 
 NODE STATUS
 NAME        ROLE  READY
-ip-172-20-49-102.ec2.internal node  True
-ip-172-20-58-69.ec2.internal  node  True
-ip-172-20-61-237.ec2.internal master  True
+ip-172-20-49-105.ec2.internal node  True
+ip-172-20-58-78.ec2.internal  node  True
+ip-172-20-61-107.ec2.internal master  True
 
 Your cluster cluster.k8s.local is ready
 ```
@@ -193,9 +193,9 @@ Your cluster cluster.k8s.local is ready
 +
 ```
 NAME                            STATUS         AGE       VERSION
-ip-172-20-49-102.ec2.internal   Ready,node     1m        v1.6.2
-ip-172-20-58-69.ec2.internal    Ready,node     1m        v1.6.2
-ip-172-20-61-237.ec2.internal   Ready,master   2m        v1.6.2
+ip-172-20-49-105.ec2.internal   Ready,node     1m        v1.6.2
+ip-172-20-58-78.ec2.internal    Ready,node     1m        v1.6.2
+ip-172-20-61-107.ec2.internal   Ready,master   2m        v1.6.2
 ```
 
 

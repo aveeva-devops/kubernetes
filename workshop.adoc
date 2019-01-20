@@ -123,7 +123,7 @@ export AWS_SECRET_ACCESS_KEY=<KEY>
 
 ==== Configure One master and two nodes Cluster on AWS
 
-. Set cluster name: `export NAME=cluster.k8s.devops`
+. Set cluster name: `export NAME=cluster.k8s.local`
 . Start Kubernetes cluster on AWS
 +
 ```
@@ -198,5 +198,12 @@ ip-172-20-58-78.ec2.internal    Ready,node     1m        v1.6.2
 ip-172-20-61-107.ec2.internal   Ready,master   2m        v1.6.2
 ```
 
+==== Delete cluster
+
+Use kops delete command to delete the cluster and its resources
+
+```
+kops delete cluster ${NAME} --yes
+```
 
 

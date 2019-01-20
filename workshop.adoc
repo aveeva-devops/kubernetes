@@ -85,7 +85,10 @@ brew update
 brew install kops 
 ```
 
-* Install kubectl
+* Install kubectl (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+
+On Mac: 
+
 ```
 brew install kubectl
 ```

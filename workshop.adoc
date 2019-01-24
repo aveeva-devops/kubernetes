@@ -4,7 +4,7 @@ toc::[]
 
 == Chapter 1 : Kubernetes Concepts and Architecture
 == Chapter 2 : Create Kubernetes Cluster 
-== Chapter 3 : Manage Pod
+== Chapter 3 : Manage Deployments 
 == Chapter 4 : Manage Replication Controller
 == Chapter 5 : Rolling Updates
 == Chapter 6 : Manage Service
@@ -209,4 +209,126 @@ Use kops delete command to delete the cluster and its resources
 kops delete cluster ${NAME} --yes
 ```
 
+## Chapter 3 : Manage Deployments 
 
+This chapter will cover below topics:
+
+* Hello world deployment on kubernetes
+* Troubleshoot application 
+* Common kubectl commands to work with pods and kubernetes
+* Expose your application
+* Scale up your application
+* Update your application
+
+=== Hello world deployment on kubernetes
+
+Create deployment helloworld.yaml file. File is combination of service and application:
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kubernetes
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: hello-kubernetes
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-kubernetes
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: aveevadevopsr/hello-kubernetes:1.5
+        ports:
+        - containerPort: 8080
+```
+
+Once file is created. Deploy application and expose it publicly using service (its part of yaml file)
+
+```
+kubectl apply -f helloworld.yaml
+```
+
+Valid application:
+
+```
+kubectl get pods
+```
+
+This will show output:
+
+```
+bash-3.2$ kubectl get pods
+NAME                                READY   STATUS             RESTARTS   AGE
+hello-kubernetes-7bf6fbdb57-8ct4z   1/1     Running            0          10m
+hello-kubernetes-7bf6fbdb57-8d6t5   1/1     Running            0          10m
+hello-kubernetes-7bf6fbdb57-h5v8t   1/1     Running            0          10m
+
+```
+
+Get logs of a specific pod
+
+```
+kubectl logs ${POD_NAME}
+
+```
+
+Get status of a single pod
+
+```
+kubectl get -w po ${POD_NAME}
+```
+
+Get Complete details about a POD_NAME
+
+```
+kubectl describe pods ${POD_NAME}
+```
+
+Get Name of container running inside the POD_NAME
+
+```
+kubectl get pod ${POD_NAME} -o jsonpath='{.spec.containers[*].name}'
+```
+
+Get logs of a specific container running inside pod
+
+```
+kubectl logs ${POD_NAME} ${CONTAINER_NAME}
+```
+
+If your container has previously crashed, you can access the previous container’s crash log with:
+
+```
+kubectl logs --previous ${POD_NAME} ${CONTAINER_NAME}
+```
+
+Debug inside container running in pod:
+
+```
+kubectl exec ${POD_NAME} -c ${CONTAINER_NAME} -- ${CMD} ${ARG1} ${ARG2} ... ${ARGN}
+Note: -c ${CONTAINER_NAME} is optional. You can omit it for pods that only contain a single container.
+For example : kubectl exec ${POD_NAME} -c ${CONTAINER_NAME} -- ls -ltr /tmp
+kubectl exec -it hello-world-deployment-677c9f4789-64lfn -c hello-world -- bash
+```
+
+Login inside a running container inside pod:
+
+```
+Kubectl exec -it ${POD_NAME} -c ${CONTAINER_NAME} -- bash
+```

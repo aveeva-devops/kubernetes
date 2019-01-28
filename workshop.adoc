@@ -339,9 +339,7 @@ spec:
     targetPort: 8080
   selector:
     app: hello-kubernetes
----
-=== Update your existing deployment
-
+```
 In above example:
 
 * Deployment kind is "service"
@@ -357,3 +355,5 @@ This will expose deployed application using AWS ELB. Find out endpoint url using
 ```
 Kubectl get deployments
 ```
+
+=== Update your existing deployment

@@ -62,22 +62,7 @@ Chapter 2 will cover below topics:
 * Delete Cluster 
 * Delete AWS resources
 
-=== Using Minikube
-
-This will create a one node development cluster.
-
-. Download https://github.com/kubernetes/minikube/releases[latest minikube release]
-. Download http://kubernetes.io/docs/getting-started-guides/minikube/#install-kubectl[latest kubectl]
-. Move both binaries in the same directory and include that directory in the `PATH`.
-. Start Kubernetes one node cluster:
-+
-  minikube start
-+
-Detailed instructions: http://kubernetes.io/docs/getting-started-guides/minikube/
-
-=== Using Kops on Amazon Web Services
-
-==== Configure Client on Mac
+=== Configure Client on Mac
 
 * install Kops: 
 ```
@@ -96,7 +81,7 @@ Check Kops version kops version. Make sure its 1.6.2 at least.
 
 http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html[Configure AWS CLI]
 
-==== Create AWS Resources
+=== Create AWS Resources
 
 . Create IAM group: `aws iam create-group --group-name kops`
 . Attach policy:
@@ -124,7 +109,7 @@ export AWS_SECRET_ACCESS_KEY=<KEY>
 . Enable bucket versioning: `aws s3api put-bucket-versioning --bucket kubernetes-devops-me --region us-east-1 --versioning-configuration Status=Enabled`
 . Set S3 bucket: `export KOPS_STATE_STORE=s3://kubernetes-devops-me`
 
-==== Configure One master and two nodes Cluster on AWS
+=== Configure One master and two nodes Cluster on AWS
 
 . Set cluster name: `export NAME=cluster.k8s.local`
 . Start Kubernetes cluster on AWS
@@ -201,7 +186,7 @@ ip-172-20-58-78.ec2.internal    Ready,node     1m        v1.6.2
 ip-172-20-61-107.ec2.internal   Ready,master   2m        v1.6.2
 ```
 
-==== Delete cluster
+=== Delete cluster
 
 Use kops delete command to delete the cluster and its resources
 
@@ -277,27 +262,34 @@ NAME                                READY   STATUS             RESTARTS   AGE
 hello-kubernetes-7bf6fbdb57-8ct4z   1/1     Running            0          10m
 hello-kubernetes-7bf6fbdb57-8d6t5   1/1     Running            0          10m
 hello-kubernetes-7bf6fbdb57-h5v8t   1/1     Running            0          10m
-```
 
 === Troubleshoot application
+
 Below commands will help to troubleshoot app running on kubernetes:
 
+```
+
 Get logs of a specific pod
+
 ```
 kubectl logs ${POD_NAME}
+
 ```
 
 Get status of a single pod
+
 ```
 kubectl get -w po ${POD_NAME}
 ```
 
 Get Complete details about a POD_NAME
+
 ```
 kubectl describe pods ${POD_NAME}
 ```
 
 Get Name of container running inside the POD_NAME
+
 ```
 kubectl get pod ${POD_NAME} -o jsonpath='{.spec.containers[*].name}'
 ```
@@ -309,11 +301,13 @@ kubectl logs ${POD_NAME} ${CONTAINER_NAME}
 ```
 
 If your container has previously crashed, you can access the previous container’s crash log with:
+
 ```
 kubectl logs --previous ${POD_NAME} ${CONTAINER_NAME}
 ```
 
 Debug inside container running in pod:
+
 ```
 kubectl exec ${POD_NAME} -c ${CONTAINER_NAME} -- ${CMD} ${ARG1} ${ARG2} ... ${ARGN}
 Note: -c ${CONTAINER_NAME} is optional. You can omit it for pods that only contain a single container.
@@ -322,6 +316,7 @@ kubectl exec -it hello-world-deployment-677c9f4789-64lfn -c hello-world -- bash
 ```
 
 Login inside a running container inside pod:
+
 ```
 Kubectl exec -it ${POD_NAME} -c ${CONTAINER_NAME} -- bash
 ```

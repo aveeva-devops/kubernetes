@@ -322,4 +322,38 @@ Kubectl exec -it ${POD_NAME} -c ${CONTAINER_NAME} -- bash
 ```
 
 === Expose your application
+
+Applications/pods inside a cluster can be exposed using service. Read https://cloud.google.com/kubernetes-engine/docs/concepts/service for more details about service and its types. Here we will use service type "LoadBalancer" to expose Hello-world using an aws LoadBalancer: 
+
+Below YAMl file explains service, which can be deployed to expose the application "hello-kubernetes":
+
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kubernetes
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: hello-kubernetes
+---
 === Update your existing deployment
+
+In above example:
+
+* Deployment kind is "service"
+* Service type is "LoadBalancer"
+* LabelSelector is " app: hello-kubernetes"
+
+Deploy this service using:
+```
+kubectl apply -f hello-kuberenets-service.yaml
+```
+
+This will expose deployed application using AWS ELB. Find out endpoint url using:
+```
+Kubectl get deployments
+```

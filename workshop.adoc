@@ -365,6 +365,37 @@ Kubectl get deployments
 
 === Scale up and Scale down your app:
 
+Scaling is accomplished by changing the number of replicas in a Deployment.
+Scaling out a Deployment will ensure new Pods are created and scheduled to Nodes with available resources. Scaling will increase the number of Pods to the new desired state. Kubernetes also supports autoscaling of Pods, but it is outside of the scope of this tutorial. Scaling to zero is also possible, and it will terminate all Pods of the specified Deployment.
+Running multiple instances of an application will require a way to distribute the traffic to all of them. Services have an integrated load-balancer that will distribute network traffic to all Pods of an exposed Deployment. Services will monitor continuously the running Pods using endpoints, to ensure the traffic is sent only to available Pods.
+Scaling is accomplished by changing the number of replicas in a Deployment.
+Once you have multiple instances of an Application running, you would be able to do Rolling updates without downtime. We'll cover that in the next module. Now, let's go to the online terminal and scale our application.
+
+Update number of replicas from 3 to 5 deploy the application using:
+```
+Kubectl create -f helloworld_service.yaml 
+```
+
+Above script will create deployment with 5 replicas (pods). Lets try to delete one of POD and see if it comes automatically:
+
+```
+kubectl get pods
+Kubectl delete pod ${POD_NAME}
+```
+We can see number of pods after some time, and number of pods will be same as before. Replication controller brought third pod back to previous state.
+
+Manually Scale up existing deployment
+```
+Kubectl scale --replicas=6 -f helloworld_service.yaml
+```
+
+Manually Scale down 
+```
+Kubectl scale --replicas=1 -f helloworld_service.yaml
+```
+You can only horizontally scale applications if they are stateless (No local data and session storage).
+Data is stored on persistent volumes or inside a database.
+
 === Update, Rolling updates and Rollback your existing deployment
 
 ## Misc

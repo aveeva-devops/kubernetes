@@ -215,7 +215,6 @@ This chapter will cover below topics:
 
 * Hello world deployment on kubernetes
 * Troubleshoot application 
-* Common kubectl commands to work with pods and kubernetes
 * Expose your application
 * Scale up your application
 * Update your application
@@ -264,7 +263,7 @@ Once file is created. Deploy application and expose it publicly using service (i
 kubectl apply -f helloworld.yaml
 ```
 
-Valid application:
+Validate application:
 
 ```
 kubectl get pods
@@ -278,6 +277,10 @@ NAME                                READY   STATUS             RESTARTS   AGE
 hello-kubernetes-7bf6fbdb57-8ct4z   1/1     Running            0          10m
 hello-kubernetes-7bf6fbdb57-8d6t5   1/1     Running            0          10m
 hello-kubernetes-7bf6fbdb57-h5v8t   1/1     Running            0          10m
+
+=== Troubleshoot application
+
+Below commands will help to troubleshoot app running on kubernetes:
 
 ```
 
@@ -332,3 +335,6 @@ Login inside a running container inside pod:
 ```
 Kubectl exec -it ${POD_NAME} -c ${CONTAINER_NAME} -- bash
 ```
+
+=== Expose your application
+=== Update your existing deployment

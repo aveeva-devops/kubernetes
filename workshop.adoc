@@ -201,8 +201,8 @@ This chapter will cover below topics:
 * Hello world deployment on kubernetes
 * Troubleshoot application 
 * Expose your application
-* Scale up your application
-* Update your application
+* Scale up and Scale down your app
+* Update and Rollback your application
 
 === Hello world deployment on kubernetes
 
@@ -356,4 +356,6 @@ This will expose deployed application using AWS ELB. Find out endpoint url using
 Kubectl get deployments
 ```
 
-=== Update your existing deployment
+=== Scale up and Scale down your app
+
+=== Update and Rollback your existing deployment

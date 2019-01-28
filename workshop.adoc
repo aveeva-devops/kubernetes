@@ -202,25 +202,13 @@ This chapter will cover below topics:
 * Troubleshoot application 
 * Expose your application
 * Scale up and Scale down your app
-* Update and Rollback your application
+* Update, Rolling updates and Rollback your existing deployment
 
 === Hello world deployment on kubernetes
 
-Create deployment helloworld.yaml file. File is combination of service and application:
+Create deployment helloworld.yaml file. 
 
 ```
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello-kubernetes
-spec:
-  type: LoadBalancer
-  ports:
-  - port: 80
-    targetPort: 8080
-  selector:
-    app: hello-kubernetes
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -248,14 +236,33 @@ Once file is created. Deploy application and expose it publicly using service (i
 kubectl apply -f helloworld.yaml
 ```
 
-Validate application:
+Service Yaml:
 
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kubernetes
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: hello-kubernetes
+```
+
+Expose app using service
+```
+kubectl apply -f helloworld_service.yaml
+```
+
+Validate application:
 ```
 kubectl get pods
 ```
 
-This will show output:
-
+This will show output as:
 ```
 bash-3.2$ kubectl get pods
 NAME                                READY   STATUS             RESTARTS   AGE
@@ -356,6 +363,10 @@ This will expose deployed application using AWS ELB. Find out endpoint url using
 Kubectl get deployments
 ```
 
-=== Scale up and Scale down your app
+=== Scale up and Scale down your app:
 
-=== Update and Rollback your existing deployment
+=== Update, Rolling updates and Rollback your existing deployment
+
+## Misc
+
+* Right now, Kubernetes will by default schedule at most 110 pods per node. 

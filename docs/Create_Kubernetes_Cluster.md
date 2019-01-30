@@ -39,36 +39,35 @@ aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAcc
 aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/IAMFullAccess --group-name kops
 aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonVPCFullAccess --group-name kops
 ```
-+
-. Create IAM user: `aws iam create-user --user-name kops`
-. Add user to group: `aws iam add-user-to-group --user-name kops --group-name kops`
-. Create keys for the user: `aws iam create-access-key --user-name kops`. Note down `SecretAccessKey` and `AccessKeyId`
-. Configure AWS CLI: `aws configure`. Use `SecretAccessKey` and `AccessKeyId`
-. Export keys:
-+
+
+Create IAM user: `aws iam create-user --user-name kops`
+Add user to group: `aws iam add-user-to-group --user-name kops --group-name kops`
+Create keys for the user: `aws iam create-access-key --user-name kops`. Note down `SecretAccessKey` and `AccessKeyId`
+Configure AWS CLI: `aws configure`. Use `SecretAccessKey` and `AccessKeyId`
+
+Export keys:
 ```
 export AWS_ACCESS_KEY_ID=<KEY>
 export AWS_SECRET_ACCESS_KEY=<KEY>
 ```
-+
-. Create S3 bucket: `aws s3api create-bucket --bucket kubernetes-devops-me --region us-east-1`
-. Enable bucket versioning: `aws s3api put-bucket-versioning --bucket kubernetes-devops-me --region us-east-1 --versioning-configuration Status=Enabled`
-. Set S3 bucket: `export KOPS_STATE_STORE=s3://kubernetes-devops-me`
+
+Create S3 bucket: `aws s3api create-bucket --bucket kubernetes-devops-me --region us-east-1`
+Enable bucket versioning: `aws s3api put-bucket-versioning --bucket kubernetes-devops-me --region us-east-1 --versioning-configuration Status=Enabled`
+Set S3 bucket: `export KOPS_STATE_STORE=s3://kubernetes-devops-me`
 
 ### Configure One master and two nodes Cluster on AWS
 
-. Set cluster name: `export NAME=cluster.k8s.local`
-. Start Kubernetes cluster on AWS
-+
+Set cluster name: `export NAME=cluster.k8s.local`
+Start Kubernetes cluster on AWS
+
 ```
 kops create cluster \
 ${NAME} \
 --zones us-east-1a \
 --yes
 ```
-+
+
 It shows the output as:
-+
 ```
 I0703 12:10:25.700774   36281 create_cluster.go:655] Inferred --cloud=aws from zone "us-east-1a"
 I0703 12:10:25.701240   36281 create_cluster.go:841] Using SSH public key: /Users/argu/.ssh/id_rsa.pub
@@ -101,9 +100,9 @@ Suggestions:
 The admin user is specific to Debian. If not using Debian please use the appropriate user based on your OS.
  * read about installing addons: https://github.com/kubernetes/kops/blob/master/docs/addons.md
 ```
-+
-. Wait for a few minutes and then validate the cluster: `kops validate cluster`:
-+
+
+Wait for a few minutes and then validate the cluster: `kops validate cluster`:
+
 ```
 Using cluster from kubectl context: cluster.k8s.local
 
@@ -122,9 +121,9 @@ ip-172-20-61-107.ec2.internal master  True
 
 Your cluster cluster.k8s.local is ready
 ```
-+
-. Get nodes in the cluster using `kubectl get nodes`:
-+
+
+Get nodes in the cluster using `kubectl get nodes`:
+
 ```
 NAME                            STATUS         AGE       VERSION
 ip-172-20-49-105.ec2.internal   Ready,node     1m        v1.6.2

@@ -10,7 +10,7 @@ This chapter will cover below topics:
 
 ### Hello world deployment on kubernetes
 
-Create deployment helloworld.yaml file. 
+Create deployment hello-kubernetes.yaml file. 
 
 ```
 apiVersion: apps/v1
@@ -37,7 +37,7 @@ spec:
 Once file is created. Deploy application and expose it publicly using service given below. Read more about service in later part of this chapter.
 
 ```
-kubectl apply -f helloworld_service.yaml
+kubectl apply -f hello-kubernetes_service.yaml
 ```
 
 Service Yaml:
@@ -170,7 +170,7 @@ Running multiple instances of an application will require a way to distribute th
 Scaling is accomplished by changing the number of replicas in a Deployment.
 Once you have multiple instances of an Application running, you would be able to do Rolling updates without downtime. We'll cover that in the next module. Now, let's go to the online terminal and scale our application.
 
-Update number of replicas from 3 to 5 deploy the application using. Update helloworld.yml and change number of replicas from 3 to 5. Deploy updated changes
+Update number of replicas from 3 to 5 deploy the application using. Update hello-kubernetes.yml and change number of replicas from 3 to 5. Deploy updated changes
 ```
 Kubectl apply -f hello-kubernete.yaml 
 ```
@@ -194,7 +194,7 @@ Kubectl scale --replicas=6 -f
 
 Manually Scale down 
 ```
-Kubectl scale --replicas=1 -f helloworld.yaml
+Kubectl scale --replicas=1 -f hello-kubernetes.yaml
 ```
 You can only horizontally scale applications if they are stateless (No local data and session storage).
 Data is stored on persistent volumes or inside a database.
@@ -233,6 +233,3 @@ spec:
   ```
   kubectl apply -f hello-kubernetes.yml
   ```
-
-
-

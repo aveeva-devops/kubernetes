@@ -28,10 +28,12 @@ http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html[Co
 ### Create AWS Resources
 
 Create IAM group: 
-``` aws iam create-group --group-name kops ```
+``` 
+aws iam create-group --group-name kops 
+```
 
 Attach policy:
-+
+
 ```
 aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess --group-name kops
 aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonRoute53FullAccess --group-name kops
@@ -40,10 +42,23 @@ aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/IAMFullAccess -
 aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonVPCFullAccess --group-name kops
 ```
 
-Create IAM user: `aws iam create-user --user-name kops`
-Add user to group: `aws iam add-user-to-group --user-name kops --group-name kops`
-Create keys for the user: `aws iam create-access-key --user-name kops`. Note down `SecretAccessKey` and `AccessKeyId`
-Configure AWS CLI: `aws configure`. Use `SecretAccessKey` and `AccessKeyId`
+Create IAM user: 
+```
+aws iam create-user --user-name kops
+```
+Add user to group: 
+```
+aws iam add-user-to-group --user-name kops --group-name kops
+```
+Create keys for the user: 
+```
+aws iam create-access-key --user-name kops
+```
+Note down `SecretAccessKey` and `AccessKeyId`
+Configure AWS CLI: 
+```aws configure
+```
+Use `SecretAccessKey` and `AccessKeyId`
 
 Export keys:
 ```
@@ -51,9 +66,18 @@ export AWS_ACCESS_KEY_ID=<KEY>
 export AWS_SECRET_ACCESS_KEY=<KEY>
 ```
 
-Create S3 bucket: `aws s3api create-bucket --bucket kubernetes-devops-me --region us-east-1`
-Enable bucket versioning: `aws s3api put-bucket-versioning --bucket kubernetes-devops-me --region us-east-1 --versioning-configuration Status=Enabled`
-Set S3 bucket: `export KOPS_STATE_STORE=s3://kubernetes-devops-me`
+Create S3 bucket: 
+```
+aws s3api create-bucket --bucket kubernetes-devops-me --region us-east-1
+```
+Enable bucket versioning: 
+```
+aws s3api put-bucket-versioning --bucket kubernetes-devops-me --region us-east-1 --versioning-configuration Status=Enabled
+```
+Set S3 bucket: 
+```
+export KOPS_STATE_STORE=s3://kubernetes-devops-me
+```
 
 ### Configure One master and two nodes Cluster on AWS
 

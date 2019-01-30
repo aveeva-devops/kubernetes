@@ -185,11 +185,8 @@ We can see number of pods after some time, and number of pods will be same as be
 
 Manually Scale up existing deployment
 ```
-Kubectl scale --replicas=6 -f 
+Kubectl scale --replicas=6 -f hello-kubernete.yaml
 
-
-
-.yaml
 ```
 
 Manually Scale down 

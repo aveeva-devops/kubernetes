@@ -69,7 +69,7 @@ hello-kubernetes-7bf6fbdb57-8ct4z   1/1     Running            0          10m
 hello-kubernetes-7bf6fbdb57-8d6t5   1/1     Running            0          10m
 hello-kubernetes-7bf6fbdb57-h5v8t   1/1     Running            0          10m
 
-=== Troubleshoot application
+### Troubleshoot application 
 
 Below commands will help to troubleshoot app running on kubernetes:
 

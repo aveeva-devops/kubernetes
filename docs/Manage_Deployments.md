@@ -37,7 +37,7 @@ spec:
 Once file is created. Deploy application and expose it publicly using service given below. Read more about service in later part of this chapter.
 
 ```
-kubectl apply -f hello-kubernetes_service.yaml
+kubectl apply -f hello-kubernetes-service.yaml
 ```
 
 Service Yaml:

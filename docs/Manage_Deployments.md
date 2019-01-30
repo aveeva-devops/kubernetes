@@ -159,7 +159,7 @@ kubectl apply -f hello-kuberenets-service.yaml
 
 This will expose deployed application using AWS ELB. Find out endpoint url using:
 ```
-Kubectl get deployments
+Kubectl get service
 ```
 
 ### Scale up and Scale down your app:
@@ -172,7 +172,7 @@ Once you have multiple instances of an Application running, you would be able to
 
 Update number of replicas from 3 to 5 deploy the application using. Update helloworld.yml and change number of replicas from 3 to 5. Deploy updated changes
 ```
-Kubectl apply -f helloworld.yaml 
+Kubectl apply -f hello-kubernete.yaml 
 ```
 
 Above script will increase pods from 3 to 5 replicas (pods). Lets try to delete one of POD and see if it comes automatically:
@@ -185,7 +185,11 @@ We can see number of pods after some time, and number of pods will be same as be
 
 Manually Scale up existing deployment
 ```
-Kubectl scale --replicas=6 -f helloworld.yaml
+Kubectl scale --replicas=6 -f 
+
+
+
+.yaml
 ```
 
 Manually Scale down 
@@ -195,5 +199,40 @@ Kubectl scale --replicas=1 -f helloworld.yaml
 You can only horizontally scale applications if they are stateless (No local data and session storage).
 Data is stored on persistent volumes or inside a database.
 
-### Update, Rolling updates and Rollback your existing deployment
+### Rolling updates and Rollback your existing deployment
+Rolling updates allow Deployments’ update to take place with zero downtime by incrementally updating Pods instances with new ones. Rolling updates would not be enabled by default in Kubernetes. We need to configure rolling update and rolling strategy to make zero downtime deployments.
+
+Users expect applications to be available all the time and developers are expected to deploy new versions of them several times a day. In Kubernetes this is done with rolling updates. Rolling updates allow Deployments’ update to take place with zero downtime by incrementally updating Pods instances with new ones. The new Pods will be scheduled on Nodes with available resources.
+
+Let’s take a simple deployment manifest.
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-kubernetes
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: aveevadevopsr/hello-kubernetes:1.5
+        ports:
+        - containerPort: 8080
+  ```
+  
+  This should work fine when you execute the following command and a deployment called hello-kubernetes will be created.
+  
+  ```
+  kubectl apply -f hello-kubernetes.yml
+  ```
+
+
 

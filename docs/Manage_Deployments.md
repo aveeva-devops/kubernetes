@@ -230,3 +230,31 @@ spec:
   ```
   kubectl apply -f hello-kubernetes.yml
   ```
+  
+ But imagine you want to update the image running in the above deployment? Then you probably have to do a kubectl edit or   just edit the yaml file as following and re-deploy using kubectl apply -f
+ 
+ Let’s see the edited yaml file (version 2.0 of image)
+ 
+ ```
+ apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-kubernetes
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: ##### aveevadevopsr/hello-kubernetes:2.0
+        ports:
+        - containerPort: 8080
+  ```
+  
+  

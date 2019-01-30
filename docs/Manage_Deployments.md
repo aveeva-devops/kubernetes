@@ -8,7 +8,7 @@ This chapter will cover below topics:
 * Scale up and Scale down your app
 * Update, Rolling updates and Rollback your existing deployment
 
-=== Hello world deployment on kubernetes
+### Hello world deployment on kubernetes
 
 Create deployment helloworld.yaml file. 
 
@@ -34,10 +34,10 @@ spec:
         - containerPort: 8080
 ```
 
-Once file is created. Deploy application and expose it publicly using service (its part of yaml file)
+Once file is created. Deploy application and expose it publicly using service given below. Read more about service in later part of this chapter.
 
 ```
-kubectl apply -f helloworld.yaml
+kubectl apply -f helloworld_service.yaml
 ```
 
 Service Yaml:
@@ -54,11 +54,6 @@ spec:
     targetPort: 8080
   selector:
     app: hello-kubernetes
-```
-
-Expose app using service
-```
-kubectl apply -f helloworld_service.yaml
 ```
 
 Validate application:
@@ -132,7 +127,7 @@ Login inside a running container inside pod:
 Kubectl exec -it ${POD_NAME} -c ${CONTAINER_NAME} -- bash
 ```
 
-=== Expose your application
+### Expose your application using service
 
 Applications/pods inside a cluster can be exposed using service. Read https://cloud.google.com/kubernetes-engine/docs/concepts/service for more details about service and its types. Here we will use service type "LoadBalancer" to expose Hello-world using an aws LoadBalancer: 
 
@@ -167,7 +162,7 @@ This will expose deployed application using AWS ELB. Find out endpoint url using
 Kubectl get deployments
 ```
 
-=== Scale up and Scale down your app:
+### Scale up and Scale down your app:
 
 Scaling is accomplished by changing the number of replicas in a Deployment.
 Scaling out a Deployment will ensure new Pods are created and scheduled to Nodes with available resources. Scaling will increase the number of Pods to the new desired state. Kubernetes also supports autoscaling of Pods, but it is outside of the scope of this tutorial. Scaling to zero is also possible, and it will terminate all Pods of the specified Deployment.
@@ -175,12 +170,12 @@ Running multiple instances of an application will require a way to distribute th
 Scaling is accomplished by changing the number of replicas in a Deployment.
 Once you have multiple instances of an Application running, you would be able to do Rolling updates without downtime. We'll cover that in the next module. Now, let's go to the online terminal and scale our application.
 
-Update number of replicas from 3 to 5 deploy the application using:
+Update number of replicas from 3 to 5 deploy the application using. Update helloworld.yml and change number of replicas from 3 to 5. Deploy updated changes
 ```
-Kubectl create -f helloworld_service.yaml 
+Kubectl apply -f helloworld.yaml 
 ```
 
-Above script will create deployment with 5 replicas (pods). Lets try to delete one of POD and see if it comes automatically:
+Above script will increase pods from 3 to 5 replicas (pods). Lets try to delete one of POD and see if it comes automatically:
 
 ```
 kubectl get pods
@@ -190,18 +185,15 @@ We can see number of pods after some time, and number of pods will be same as be
 
 Manually Scale up existing deployment
 ```
-Kubectl scale --replicas=6 -f helloworld_service.yaml
+Kubectl scale --replicas=6 -f helloworld.yaml
 ```
 
 Manually Scale down 
 ```
-Kubectl scale --replicas=1 -f helloworld_service.yaml
+Kubectl scale --replicas=1 -f helloworld.yaml
 ```
 You can only horizontally scale applications if they are stateless (No local data and session storage).
 Data is stored on persistent volumes or inside a database.
 
-=== Update, Rolling updates and Rollback your existing deployment
+### Update, Rolling updates and Rollback your existing deployment
 
-## Misc
-
-* Right now, Kubernetes will by default schedule at most 110 pods per node. 

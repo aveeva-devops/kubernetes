@@ -346,3 +346,8 @@ spec:
              initialDelaySeconds: 5
              periodSeconds: 5
              successThreshold: 1
+```
+
+Applying this deployment manifest will ensure rolling updates without any downtime. 
+
+This wraps up the third chapter !!

@@ -8,17 +8,15 @@ Chapter 2 will cover below topics:
 * Delete Cluster 
 * Delete AWS resources
 
-=== Configure Client on Mac
+### Configure Client on Mac
 
-* install Kops: 
+Install Kops: 
 ```
 brew update
 brew install kops 
 ```
 
-* Install kubectl (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-
-On Mac: 
+Install kubectl on Mac (https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ```
 brew install kubectl
@@ -27,10 +25,12 @@ Check Kops version kops version. Make sure its 1.6.2 at least.
 
 http://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html[Configure AWS CLI]
 
-=== Create AWS Resources
+### Create AWS Resources
 
-. Create IAM group: `aws iam create-group --group-name kops`
-. Attach policy:
+Create IAM group: 
+``` aws iam create-group --group-name kops ```
+
+Attach policy:
 +
 ```
 aws iam attach-group-policy --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess --group-name kops
@@ -55,7 +55,7 @@ export AWS_SECRET_ACCESS_KEY=<KEY>
 . Enable bucket versioning: `aws s3api put-bucket-versioning --bucket kubernetes-devops-me --region us-east-1 --versioning-configuration Status=Enabled`
 . Set S3 bucket: `export KOPS_STATE_STORE=s3://kubernetes-devops-me`
 
-=== Configure One master and two nodes Cluster on AWS
+### Configure One master and two nodes Cluster on AWS
 
 . Set cluster name: `export NAME=cluster.k8s.local`
 . Start Kubernetes cluster on AWS
@@ -132,7 +132,7 @@ ip-172-20-58-78.ec2.internal    Ready,node     1m        v1.6.2
 ip-172-20-61-107.ec2.internal   Ready,master   2m        v1.6.2
 ```
 
-=== Delete cluster
+### Delete cluster
 
 Use kops delete command to delete the cluster and its resources
 

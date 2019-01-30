@@ -231,7 +231,7 @@ spec:
   kubectl apply -f hello-kubernetes.yml
   ```
   
- But imagine you want to update the image running in the above deployment? Then you probably have to do a kubectl edit or   just edit the yaml file as following and re-deploy using kubectl apply -f
+But imagine you want to update the image running in the above deployment? Then you probably have to do a kubectl edit or   just edit the yaml file as following and re-deploy using kubectl apply -f
  
  Let’s see the edited yaml file (version 2.0 of image)
  
@@ -252,9 +252,97 @@ spec:
     spec:
       containers:
       - name: hello-kubernetes
-        image: ##### aveevadevopsr/hello-kubernetes:2.0
+        image: aveevadevopsr/hello-kubernetes:2.0
         ports:
         - containerPort: 8080
   ```
   
-  
+Once you apply this or edit this, notice that there maybe a little downtime on your application because the old pods are getting terminated and the new ones are getting created. You can easily notice a downtime if you open a new tab on your terminal and run a curl command your exposed service every second.
+
+This happens because kubernetes doesn’t know when your new pod is ready to start accepting requests, so as soon as your new pod gets created, the old pod is terminated without waiting to see if all the necessary services, processes have started in the new pod which would then enable it to receive requests.
+
+To do this, Kubernetes provide a config option in deployment called Readiness Probe. Readiness Probe makes sure that the new pods created are ready to take on requests before terminating the old pods. To enable this, first you need to have a route in whatever the application you want to run which would return a 200 on an HTTP GET request. (Note: you can have other HTTP request methods as well, but for this post, I’m sticking with GET method).
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-kubernetes
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: aveevadevopsr/hello-kubernetes:2.0
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+             path: /
+             port: 8080
+             initialDelaySeconds: 5
+             periodSeconds: 5
+             successThreshold: 1
+  ```
+Don't worry about Readiness Probe, I will explain this in next chapter in HealthCheck section.
+
+Another thing we should add is something called RollingUpdate strategy and it can be configured as follows.
+
+```
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+     maxUnavailable: 25%
+     maxSurge: 1
+```
+
+The above specifies the strategy used to replace old Pods by new ones. The type can be “Recreate” or “RollingUpdate”. “RollingUpdate” is the default value.
+
+##### maxUnavailable: 
+is an optional field that specifies the maximum number of Pods that can be unavailable during the update process. The value can be an absolute number (for example, 5) or a percentage of desired Pods (for example, 10%). The absolute number is calculated from percentage by rounding down. The value cannot be 0 if maxSurge is 0. The default value is 25%.
+
+##### maxSurge 
+is an optional field that specifies the maximum number of Pods that can be created over the desired number of Pods. The value can be an absolute number (for example, 5) or a percentage of desired Pods (for example, 10%). The value cannot be 0 if MaxUnavailable is 0. The absolute number is calculated from the percentage by rounding up. The default value is 25%.
+
+With all the above, configurations, Let’s take a look at the final deployment file.
+
+```
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 3
+  strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: hello-kubernetes
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: aveevadevopsr/hello-kubernetes:2.0
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+             path: /
+             port: 8080
+             initialDelaySeconds: 5
+             periodSeconds: 5
+             successThreshold: 1

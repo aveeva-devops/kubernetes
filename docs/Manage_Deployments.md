@@ -6,7 +6,7 @@ This chapter will cover below topics:
 * Troubleshoot application 
 * Expose your application
 * Scale up and Scale down your app
-* Update, Rolling updates and Rollback your existing deployment
+* Rolling updates and Rollback your existing deployment
 
 ### Hello world deployment on kubernetes
 
@@ -197,6 +197,8 @@ You can only horizontally scale applications if they are stateless (No local dat
 Data is stored on persistent volumes or inside a database.
 
 ### Rolling updates and Rollback your existing deployment
+
+#### Rolling updates: 
 Rolling updates allow Deployments’ update to take place with zero downtime by incrementally updating Pods instances with new ones. Rolling updates would not be enabled by default in Kubernetes. We need to configure rolling update and rolling strategy to make zero downtime deployments.
 
 Users expect applications to be available all the time and developers are expected to deploy new versions of them several times a day. In Kubernetes this is done with rolling updates. Rolling updates allow Deployments’ update to take place with zero downtime by incrementally updating Pods instances with new ones. The new Pods will be scheduled on Nodes with available resources.
@@ -349,5 +351,7 @@ spec:
 ```
 
 Applying this deployment manifest will ensure rolling updates without any downtime. 
+
+#### Rollback your existing deployment
 
 This wraps up the third chapter !!

@@ -108,7 +108,8 @@ Without that, you could get stuck in a reboot loop. On the other hand, this valu
 for readiness probes as you’ll likely want traffic to reach your new containers as soon as they’re ready.
 ###### timeoutSeconds 
 How long a request can take to respond before it’s considered a failure. 
-###### periodSeconds How often a probe will be sent. 
+###### periodSeconds 
+How often a probe will be sent. 
 The value you set here depends on finding a balance between sending too many probes to your service or 
 going too long without detecting a failure. 
 In most cases we settle for a value between 10 and 20 seconds here.

@@ -10,9 +10,12 @@ This chapter will cover below topics:
 
 With a few lines of YAML, you can turn your Kubernetes pods into auto healing wonders. 
 The right combination of liveness and readiness probes used with Kubernetes deployments can:
+
+```
     1. Enable zero downtime deploys
     2. Prevent deployment of broken images
     3. Ensure that failed containers are automatically restarted
+```
 
 #### Readiness probes
 The kubelet uses readiness probes to know when is container is ready to start accepting traffic. 

@@ -42,6 +42,18 @@ Here’s what this might look like in a real life failure scenario. Let’s say 
 Lets take an example of yaml file with readiness probes and livenss probes
 
 ```
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kubernetes
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: hello-kubernetes
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -62,19 +74,17 @@ spec:
         ports:
         - containerPort: 8080
         livenessProbe:
-         httpGet:
-           path:/
-           port: 8080
-         initialDelaySeconds: 15
-         timeoutSeconds: 30
-         periodSeconds: 15
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 3
+          timeoutSeconds: 30
         readinessProbe:
-         httpGet:
-           path:/
-           port: 8080
-         initialDelaySeconds: 15
-         timeoutSeconds: 30
-         periodSeconds: 15
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 3
+          timeoutSeconds: 30
 
 ```
 
@@ -89,18 +99,18 @@ as the name and image attributes for your containers in a deployment.
 For one of our services, the probe configuration looks something like:
 
 ```
-    livenessProbe:
-         httpGet:
-           path:/
-           port: 8080
-         initialDelaySeconds: 15
-         timeoutSeconds: 30
-    readinessProbe:
-         httpGet:
-           path:/
-           port: 8080
-         initialDelaySeconds: 15
-         timeoutSeconds: 30
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 3
+          timeoutSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 3
+          timeoutSeconds: 30
 ```
 
 The attributes are pretty straightforward here. The key ones to pay attention to are:

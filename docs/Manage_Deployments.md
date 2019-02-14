@@ -354,4 +354,9 @@ Applying this deployment manifest will ensure rolling updates without any downti
 
 #### Rollback your existing deployment
 
+Check the rollout status
+
+```
+kubectl rollout status 
+
 This wraps up the third chapter !!

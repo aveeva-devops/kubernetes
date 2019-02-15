@@ -153,3 +153,19 @@ This ensures that not only is the service running, it’s continuing to function
 The exec option for probes is incredibly powerful. 
 We’re using a fairly simple command in the above example, but the sky’s the limit here. 
 Each service is unique and this allows for a flexible way to ensure that things remain functional.
+
+### Labels
+
+Labels are the mechanism you use to organize Kubernetes objects. A label is a key-value pair with certain restrictions concerning length and allowed values but without any pre-defined meaning. So you’re free to choose labels as you see fit, for example, to express environments such as ‘this pod is running in production’ or ownership, like ‘department X owns that pod’.
+
+Let’s create a pod that initially has one label (env=development):
+
+```
+kubectl create -f hello-kubernetes-label.yml
+```
+
+Get labels
+
+```
+kubectl get pods --show-labels
+```

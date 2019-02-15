@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: hello-kubernetes
   labels:
-    env: development
+    env: production
     owner: devops
 spec:
   replicas: 3

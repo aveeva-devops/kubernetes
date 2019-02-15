@@ -196,6 +196,11 @@ Kubectl scale --replicas=1 -f hello-kubernetes.yaml
 You can only horizontally scale applications if they are stateless (No local data and session storage).
 Data is stored on persistent volumes or inside a database.
 
+Delete the deployment
+```
+kubectl delete -f hello-kubernetes.yaml
+```
+
 ### Rolling updates and Rollback your existing deployment
 
 #### Rolling updates: 

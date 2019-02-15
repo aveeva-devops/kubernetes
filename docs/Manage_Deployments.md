@@ -359,13 +359,11 @@ Applying this deployment manifest will ensure rolling updates without any downti
 
 #### Rollback your existing deployment
 
-Check the rollout/deployment status
-
 Step 1: Get deployment details and note down name of deployment you need to rollback
 
 ```
 kubectl get deployment
-``
+```
 Check status of deployment 
 
 ```
@@ -378,7 +376,7 @@ Get deployment history
 kubectl rollout history deployment/${deployment_name}
 kubectl rollout history deployment/hello-kubernetes
 ```
-Update deployment to new image. Below will updated deployment to version 2.0
+Update deployment to new image. Below command will update deployment to version 2.0
 ```
 kubectl set image deployment/${deployment_name} ${container_name}:${image_name}:${image_version}
 kubectl set image deployment/hello-kubernetes hello-kubernetes:aveevadevopsr/hello-kubernetes:2.0
@@ -397,9 +395,18 @@ Rollback to previous version of deployment
 kubectl rollout undo deployment/${deployment_name}
 kubectl describe deployment/${deployment_name}
 ```
+Rollback to a specific previous version
 
+```
+Kubectl rollout history deployment/hello-kubernetes
+kubectl rollout undo deployment/${deployment_name} --to-revision=1
+```
 
-
+By Default kubernetes keeps 2 versions, if we need to go back to later versions, then we need to edit history limit
+```
+Kubectl edit deployment/${deployment_name}
+```
+and edit to ddd revisionHistoryLimit:100
 
 Get deployment info
 

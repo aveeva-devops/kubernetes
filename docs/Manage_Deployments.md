@@ -361,15 +361,45 @@ Applying this deployment manifest will ensure rolling updates without any downti
 
 Check the rollout/deployment status
 
-```
-kubectl rollout status hello-kubernetes.yml
+Step 1: Get deployment details and note down name of deployment you need to rollback
 
+```
+kubectl get deployment
+``
+Check status of deployment 
+
+```
+kubectl rollout status deployment/${deployment_name}
+kubectl rollout status deployment/hello-kubernetes
 ```
 
 Get deployment history
 ```
-kubectl rollout history
+kubectl rollout history deployment/${deployment_name}
+kubectl rollout history deployment/hello-kubernetes
 ```
+Update deployment to new image. Below will updated deployment to version 2.0
+```
+kubectl set image deployment/${deployment_name} ${container_name}:${image_name}:${image_version}
+kubectl set image deployment/hello-kubernetes hello-kubernetes:aveevadevopsr/hello-kubernetes:2.0
+```
+Check rollout history to check the updated version
+```
+kubectl rollout history deployment/hello-kubernetes
+```
+Check updated deployment, it should use the 2.0 image now
+```
+kubectl describe deployment/${deployment_name}
+```
+
+Rollback to previous version of deployment
+```
+kubectl rollout undo deployment/${deployment_name}
+kubectl describe deployment/${deployment_name}
+```
+
+
+
 
 Get deployment info
 

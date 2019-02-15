@@ -169,3 +169,39 @@ Get labels
 ```
 kubectl get pods --show-labels
 ```
+In above get pods command note the --show-labels option that output the labels of an object in an additional column.
+
+You can add a label to the pod as:
+
+```
+kubectl label pods ${POD_NAME} owner=devops
+kubectl get pods --show-labels
+```
+
+To use a label for filtering, for example to list only pods that have an owner that equals devops, use the --selector option
+
+```
+kubectl get pods --selector owner=devops
+kubectl get pods -l env=development
+```
+In above example, the --selector option is abbreviated to -l
+
+##### Set based selectors
+
+Kubernetes objects also support set based selectors. Lets launch another pod that has two labels (env=production and owner=devops)
+
+```
+kubectl create -f hello-kubernetes-label-set.yml
+```
+
+Get pods with env=production and owner=devops
+```
+kubectl get pods -l 'env in (production, development)'
+```
+
+To delete pods with specified label
+```
+kubectl delete pods -l 'env in (production, development)'
+```
+
+

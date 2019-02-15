@@ -354,9 +354,18 @@ Applying this deployment manifest will ensure rolling updates without any downti
 
 #### Rollback your existing deployment
 
-Check the rollout status
+Check the rollout/deployment status
 
 ```
-kubectl rollout status 
+kubectl rollout status hello-kubernetes.yml
+
+```
+
+Get deployment history
+```
+kubectl rollout history
+```
+
+Get deployment info
 
 This wraps up the third chapter !!

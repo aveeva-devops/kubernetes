@@ -9,6 +9,7 @@ This tutorial assumes you have access to the [AWS](https://aws.amazon.com/). Whi
 * [Chapter 2: Installation, Configuration & Validation](docs/Installation_Configuration_Validation.md)
 * [Chapter 3: Security](docs/Security.md)
 * [Chapter 4: Cluster Maintenance](docs/Cluster_Maintenance.md)
+* [Chapter 5: Kubernetes Dashboard](https://github.com/kubernetes/dashboard)
 
 ### Section 2 - Developer tasks - Deployment Management
 

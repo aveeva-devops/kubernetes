@@ -310,6 +310,6 @@ By default, all deletes are graceful within 30 seconds. The kubectl delete comma
 
 ##### Pods lifecycle
 
-
+Refer https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/ to know more about Pod lifecycle
 
 

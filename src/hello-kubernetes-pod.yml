@@ -1,19 +1,11 @@
-apiVersion: apps/v1
+apiVersion: v1
 kind: Pod
 metadata:
-  name: hello-kubernetes
+  name: myapp-pod
+  labels:
+    app: myapp
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: hello-kubernetes
-  template:
-    metadata:
-      labels:
-        app: hello-kubernetes
-    spec:
-      containers:
-      - name: hello-kubernetes
-        image: aveevadevopsr/hello-kubernetes:1.5
-        ports:
-        - containerPort: 8080
+  containers:
+  - name: myapp-container
+    image: busybox
+    command: ['sh', '-c', 'echo Hello Kubernetes! && sleep 3600']

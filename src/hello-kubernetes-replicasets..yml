@@ -5,12 +5,13 @@ metadata:
 spec:
   replicas: 3
   selector:
+    matchLabels:
       app: hello-kubernetes
   template:
     metadata:
-      name: hello-kubernetes
       labels:
         app: hello-kubernetes
+        environment: dev
     spec:
       containers:
       - name: hello-kubernetes

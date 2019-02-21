@@ -1,1 +1,19 @@
-test file
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 3
+  selector:
+      app: hello-kubernetes
+  template:
+    metadata:
+      name: hello-kubernetes
+      labels:
+        app: hello-kubernetes
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: aveevadevopsr/hello-kubernetes:1.5
+        ports:
+        - containerPort: 8080

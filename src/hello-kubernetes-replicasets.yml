@@ -5,7 +5,8 @@ metadata:
 spec:
   replicas: 3
   selector:
-    matchLabels:
+    matchExpressions:
+      - {key: app, operator: in, values: [hello-kubernetes
       app: hello-kubernetes
   template:
     metadata:

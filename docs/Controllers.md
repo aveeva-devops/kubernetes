@@ -65,4 +65,38 @@ kubectl delete rc hello-kubernetes
 As you can see, when you delete the Replication Controller, you also delete all of the pods that it created.
 
 ### ReplicaSet
+Replica Set ensures how many replica of pod should be running. It can be considered as a replacement of replication controller. The key difference between the replica set and the replication controller is, the replication controller only supports equality-based selector whereas the replica set supports set-based selector.
+
+Replica Sets are a sort of hybrid, in that they are in some ways more powerful than Replication Controllers, and in others they are less powerful.
+
+Replica Sets are declared in essentially the same way as Replication Controllers, except that they have more options for the selector.  For example, we could create a Replica Set like this:
+
+```
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-kubernetes
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes
+        environment: dev
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: aveevadevopsr/hello-kubernetes:1.5
+        ports:
+        - containerPort: 8080
+```
+Create replicaSets now using command:
+```
+kubectl create -f hello-kubernetes-replicasets.yml
+replicaset "hello-kubernetes" created
+```
+
 https://www.mirantis.com/blog/kubernetes-replication-controller-replica-set-and-deployments-understanding-replication-options/

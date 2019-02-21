@@ -15,8 +15,54 @@ A Replication Controller is a structure that enables you to easily create multip
 
 Replication Controllers also provide other benefits, such as the ability to scale the number of pods, and to update or delete multiple pods with a single command.
 
-You can create a Replication Controller with an imperative command, or declaratively, from a file.  For example, create a new file called rc.yaml and add the following text:
+You can create a Replication Controller with an imperative command, or declaratively, from a file.  For example, create a new file called hello-kubernetes-rc.yml and add the following text:
 
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 3
+  selector:
+      app: hello-kubernetes
+  template:
+    metadata:
+      name: hello-kubernetes
+      labels:
+        app: hello-kubernetes
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: aveevadevopsr/hello-kubernetes:1.5
+        ports:
+        - containerPort: 8080
+   ```
+Now tell Kubernetes to create the Replication Controller based on that file:
+
+```
+kubectl create -f hello-kubernetes-rc.yml
+replicationcontroller "hello-kubernetes" created
+```
+
+Let’s take a look at what we have using the describe command:
+
+```
+kubectl describe rc hello-kubernetes
+```
+
+As you can see, we’ve got the Replication Controller, and there are 3 replicas, of the 3 that we wanted.  All 3 of them are currently running.  You can also see the individual pods listed underneath, along with their names.  If you ask Kubernetes to show you the pods, you can see those same names show up:
+
+```
+kubectl get pods
+```
+
+Delete the replication controller
+
+```
+kubectl delete rc hello-kubernetes
+```
+As you can see, when you delete the Replication Controller, you also delete all of the pods that it created.
 
 ### ReplicaSet
 https://www.mirantis.com/blog/kubernetes-replication-controller-replica-set-and-deployments-understanding-replication-options/

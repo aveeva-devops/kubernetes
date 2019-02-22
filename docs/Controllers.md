@@ -79,8 +79,9 @@ metadata:
 spec:
   replicas: 3
   selector:
-    matchLabels:
-      app: hello-kubernetes
+    matchExpressions:
+      - {key: app, operator: In, values: [hello-kubernetes, hello-kubernetes1]}
+      - {key: teir, operator: NotIn, values: [production]}
   template:
     metadata:
       labels:
@@ -89,7 +90,7 @@ spec:
     spec:
       containers:
       - name: hello-kubernetes
-        image: aveevadevopsr/hello-kubernetes:1.5
+        image: aveevadevops/hello-kubernetes:1.5
         ports:
         - containerPort: 8080
 ```
@@ -97,6 +98,18 @@ Create replicaSets now using command:
 ```
 kubectl create -f hello-kubernetes-replicasets.yml
 replicaset "hello-kubernetes" created
+```
+
+Check replicasets
+```
+kubectl get rs ${NAME}
+kubectl get hello-kubernetes
+```
+
+Describe replicasets to get details
+```
+kubectl describe rs ${NAME}
+kubectl describe rs hello-kubernetes
 ```
 
 https://www.mirantis.com/blog/kubernetes-replication-controller-replica-set-and-deployments-understanding-replication-options/

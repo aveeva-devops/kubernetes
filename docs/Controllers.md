@@ -126,4 +126,8 @@ Deployments are intended to replace Replication Controllers.  They provide the s
 
 For more information about deployment, refer Chapter #3 - https://github.com/aveeva-devops/kubernetes/blob/master/docs/Manage_Deployments.md 
 
+### StatefulSets
+
+### DaemonSet
+
 https://www.mirantis.com/blog/kubernetes-replication-controller-replica-set-and-deployments-understanding-replication-options/

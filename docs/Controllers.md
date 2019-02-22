@@ -4,6 +4,7 @@ This chapter will cover various kubernetes controllers. This includes
 * Deployment
 * StatefulSets
 * DaemonSet
+* ConfigMap
 * Garbage Collection
 * TTL Controller for Finished Resources
 * CronJob

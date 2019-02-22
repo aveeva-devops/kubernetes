@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: hello-kubernetes
-        image: aveevadevopsr/hello-kubernetes:1.5
+        image: aveevadevops/hello-kubernetes:1.5
         ports:
         - containerPort: 8080

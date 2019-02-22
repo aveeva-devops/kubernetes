@@ -6,8 +6,8 @@ spec:
   replicas: 3
   selector:
     matchExpressions:
-      - {key: app, operator: in, values: [hello-kubernetes
-      app: hello-kubernetes
+      - {key: app, operator: In, values: [hello-kubernetes, hello-kubernetes1]}
+      - {key: teir, operator: NotIn, values: [production]}
   template:
     metadata:
       labels:

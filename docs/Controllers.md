@@ -112,4 +112,10 @@ kubectl describe rs ${NAME}
 kubectl describe rs hello-kubernetes
 ```
 
+Delete replicaset
+```
+kubectl delete rs ${NAME}
+kubectl delete rs hello-kubernetes
+```
+
 https://www.mirantis.com/blog/kubernetes-replication-controller-replica-set-and-deployments-understanding-replication-options/

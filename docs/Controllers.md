@@ -112,10 +112,18 @@ kubectl describe rs ${NAME}
 kubectl describe rs hello-kubernetes
 ```
 
-Delete replicaset
+As you can see, the output is pretty much the same as for a Replication Controller (except for the selector), and for most intents and purposes, they are similar.  The major difference is that the rolling-update command works with Replication Controllers, but won’t work with a Replica Set.  This is because Replica Sets are meant to be used as the backend for Deployments.
+
+Let’s clean up before we move on.
+
 ```
 kubectl delete rs ${NAME}
 kubectl delete rs hello-kubernetes
 ```
+
+### Deployment
+Deployments are intended to replace Replication Controllers.  They provide the same replication functions (through Replica Sets) and also the ability to rollout changes and roll them back if necessary.
+
+For more information about deployment, refer Chapter #3 - https://github.com/aveeva-devops/kubernetes/blob/master/docs/Manage_Deployments.md 
 
 https://www.mirantis.com/blog/kubernetes-replication-controller-replica-set-and-deployments-understanding-replication-options/

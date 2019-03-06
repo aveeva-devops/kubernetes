@@ -130,5 +130,4 @@ For more information about deployment, refer Chapter #3 - https://github.com/ave
 ### StatefulSets
 
 ### DaemonSet
-
-https://www.mirantis.com/blog/kubernetes-replication-controller-replica-set-and-deployments-understanding-replication-options/
+https://cloud.google.com/kubernetes-engine/docs/concepts/daemonset

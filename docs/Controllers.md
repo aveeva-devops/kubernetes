@@ -169,8 +169,7 @@ spec:
           requests:
             cpu: 100m
             memory: 200Mi
-    ```
-
+```
 In this example:
 
 A DaemonSet named fluentd is created, indicated by the metadata: name field.
@@ -187,4 +186,12 @@ Request some memory and CPU resources.
 For more information about DaemonSet configurations, refer to the DaemonSet API reference.
 
 ##### Updating DaemonSets
-https://cloud.google.com/kubernetes-engine/docs/concepts/daemonset
+You can update DaemonSets by changing its Pod specification, resource requests and limits, labels, and annotations.
+
+To decide how to handle updates, DaemonSet use a update strategy defined in spec: updateStrategy. There are two strategies, OnDelete and RollingUpdate:
+
+OnDelete does not automatically delete and recreate DaemonSet Pods when the object's configuration is changed. Instead, Pods must be manually deleted to cause the controller to create new Pods that reflect your changes.
+RollingUpdate automatically deletes and recreates DaemonSet Pods. With this strategy, valid changes automatically triggers a rollout. This is the default update strategy for DaemonSets.
+Update rollouts can be monitored by running the following command:
+
+kubectl rollout status ds [DAEMONSET_NAME]

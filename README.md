@@ -21,5 +21,5 @@ This tutorial assumes you have access to the [AWS](https://aws.amazon.com/). Whi
 * [Chapter 6: Scheduling](docs/Scheduling.md)
 * [Chapter 7: Logging and Monitoring](docs/Logging_Monitoring.md)
 * [Chapter 8: Storage](docs/Storage.md)
-* [Chapter 9: Networking](docs/Networking.md)
+* [Chapter 9: Networking and Secrets](docs/Networking.md)
 * [Reference](docs/Reference.md)

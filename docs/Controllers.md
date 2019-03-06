@@ -196,3 +196,6 @@ RollingUpdate automatically deletes and recreates DaemonSet Pods. With this stra
 Update rollouts can be monitored by running the following command:
 
 kubectl rollout status ds [DAEMONSET_NAME]
+
+### configmap
+https://cloud.google.com/kubernetes-engine/docs/concepts/configmap

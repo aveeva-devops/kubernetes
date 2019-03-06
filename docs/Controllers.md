@@ -191,6 +191,7 @@ You can update DaemonSets by changing its Pod specification, resource requests a
 To decide how to handle updates, DaemonSet use a update strategy defined in spec: updateStrategy. There are two strategies, OnDelete and RollingUpdate:
 
 OnDelete does not automatically delete and recreate DaemonSet Pods when the object's configuration is changed. Instead, Pods must be manually deleted to cause the controller to create new Pods that reflect your changes.
+
 RollingUpdate automatically deletes and recreates DaemonSet Pods. With this strategy, valid changes automatically triggers a rollout. This is the default update strategy for DaemonSets.
 Update rollouts can be monitored by running the following command:
 

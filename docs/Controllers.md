@@ -130,4 +130,61 @@ For more information about deployment, refer Chapter #3 - https://github.com/ave
 ### StatefulSets
 
 ### DaemonSet
+Like other workload objects, DaemonSets manage groups of replicated Pods. However, DaemonSets attempt to adhere to a one-Pod-per-node model, either across the entire cluster or a subset of nodes. As you add nodes to a node pool, DaemonSets automatically add Pods to the new nodes as needed.
+
+DaemonSets use a Pod template, which contains a specification for its Pods. The Pod specification determines how each Pod should look: what applications should run inside its containers, which volumes it should mount, its labels and selectors, and more.
+
+##### Usage patterns
+DaemonSets are useful for deploying ongoing background tasks that you need to run on all or certain nodes, and which do not require user intervention. Examples of such tasks include storage daemons like ceph, log collection daemons like fluentd, and node monitoring daemons like collectd.
+
+For example, you could have DaemonSets for each type of daemon run on all of your nodes. Alternatively, you could run multiple DaemonSets for a single type of daemon, but have them use different configurations for different hardware types and resource needs.
+
+##### Creating DaemonSets
+You can create a DaemonSet using kubectl apply or kubectl create.
+The following is an example of a DaemonSet manifest file:
+
+```
+apiVersion: v1/beta2 # For Kubernetes version 1.9 and later, use apps/v1
+kind: DaemonSet
+metadata:
+  name: fluentd
+spec:
+  selector:
+      matchLabels:
+        name: fluentd # Label selector that determines which Pods belong to the DaemonSet
+  template:
+    metadata:
+      labels:
+        name: fluentd # Pod template's label selector
+    spec:
+      nodeSelector:
+        type: prod # Node label selector that determines on which nodes Pod should be scheduled
+                   # In this case, Pods are only scheduled to nodes bearing the label "type: prod"
+      containers:
+      - name: fluentd
+        image: gcr.io/google-containers/fluentd-elasticsearch:1.20
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+    ```
+
+In this example:
+
+A DaemonSet named fluentd is created, indicated by the metadata: name field.
+DaemonSet's Pod is labelled fluentd.
+A node label selector (type: prod) declares on which labelled nodes the DaemonSet schedules its Pod.
+The Pod's container pulls the fluentd-elasticsearch image at version 1.20. The container image is hosted by Container Registry.
+The container requests 100m of CPU and 200Mi of memory, and limits itself to 200Mi total of memory usage.
+In sum, the Pod specification contains the following instructions:
+
+Label Pod as fluentd.
+Use node label selector type: prod to schedule Pod to matching nodes, and do not schedule on nodes which do not bear the label selector. (Alternatively, omit the nodeSelector field to schedule on all nodes.)
+Run fluentd-elasticsearch at version 1.20.
+Request some memory and CPU resources.
+For more information about DaemonSet configurations, refer to the DaemonSet API reference.
+
+##### Updating DaemonSets
 https://cloud.google.com/kubernetes-engine/docs/concepts/daemonset

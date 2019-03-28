@@ -23,3 +23,6 @@ This tutorial assumes you have access to the [AWS](https://aws.amazon.com/). Whi
 * [Chapter 8: Storage](docs/Storage.md)
 * [Chapter 9: Networking and Secrets](docs/Networking.md)
 * [Reference](docs/Reference.md)
+
+
+### Section 3 - Amazon EKS setup 

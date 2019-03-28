@@ -26,3 +26,5 @@ This tutorial assumes you have access to the [AWS](https://aws.amazon.com/). Whi
 
 
 ### Section 3 - Amazon EKS setup 
+
+https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html

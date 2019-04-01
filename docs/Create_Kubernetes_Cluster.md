@@ -235,5 +235,13 @@ Create VPC:
 aws cloudformation create-stack --stack-name ekspoc-vpc --template-body file://ekspoc-vpc.yaml --parameters ParameterKey=Name,ParameterValue=ekspocvpc
 ```
 
+Note down VPCId, Security groups and SubnetID's from above step
 
+### Create EKS Cluster
 
+Create EKS using below command
+ 
+ ```
+ aws eks create-cluster --name ekspoc --role-arn arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI --resources-vpc-config subnetIds=subnet-6782e71e,subnet-e7e761ac,securityGroupIds=sg-6979fe18
+ 
+ ```

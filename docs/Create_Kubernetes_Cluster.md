@@ -232,7 +232,7 @@ https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-
 
 Create VPC:
 ```
-aws cloudformation create-stack --stack-name ekspoc-vpc --template-body file://ekspoc-vpc.yaml --parameters ParameterKey=KeyPairName,ParameterValue=ekspocvpc ParameterKey=SubnetIDs,ParameterValue=SubnetID1\\,SubnetID2
+aws cloudformation create-stack --stack-name ekspoc-vpc --template-body file://ekspoc-vpc.yaml --parameters ParameterKey=Name,ParameterValue=ekspocvpc
 ```
 
 

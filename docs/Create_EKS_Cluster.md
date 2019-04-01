@@ -1,4 +1,4 @@
-## Chapter 2 Part2 : Create Kubernetes Cluster Using Amazon EKS
+## Chapter 3 : Create Kubernetes Cluster Using Amazon EKS
 
 ### Create AWS Resources - IAM
 

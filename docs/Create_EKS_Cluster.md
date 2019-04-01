@@ -80,3 +80,5 @@ Create EKS using below command
  aws eks create-cluster --name ekspoc --role-arn arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI --resources-vpc-config subnetIds=subnet-6782e71e,subnet-e7e761ac,securityGroupIds=sg-6979fe18
  
  ```
+ 
+ ### Setup CLI tools for EKS cluster

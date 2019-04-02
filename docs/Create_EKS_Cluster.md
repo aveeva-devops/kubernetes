@@ -133,6 +133,7 @@ Create EKS using below command
  
  ```
  
+ ### Launch the k8s EC2 worker nodes
  
  
  

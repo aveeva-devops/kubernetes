@@ -12,7 +12,7 @@ Create two additional EKS Policies
 
 ```
 aws iam create-policy --policy-name EKS-Admin-policy --policy-document file://EKS-Admin-policy.json
-aws iam create-policy --policy-name EKS-Admin-policy --policy-document file://CloudFormation-Admin-policy.json
+aws iam create-policy --policy-name CloudFormation-Admin-policy --policy-document file://CloudFormation-Admin-policy.json
 ```
 
 First is EKS-Admin-policy

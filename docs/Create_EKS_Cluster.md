@@ -107,3 +107,7 @@ Create EKS using below command
  ```
  
  ### Setup CLI tools for EKS cluster
+ 
+ ### References
+ https://logz.io/blog/amazon-eks/
+ 

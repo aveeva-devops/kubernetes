@@ -53,8 +53,8 @@ Second is CloudFormation-Admin-policy
 Attach these policies to user
 
 ```
-aws iam attach-user-policy --user-name ekspoc --policy-arn arn:aws:iam::aws:policy/EKS-Admin-policy
-aws iam attach-user-policy --user-name ekspoc --policy-arn arn:aws:iam::aws:policy/CloudFormation-Admin-policy
+aws iam attach-user-policy --user-name ekspoc --policy-arn arn:aws:iam::AccountNumber:policy/EKS-Admin-policy
+aws iam attach-user-policy --user-name ekspoc --policy-arn arn:aws:iam::AccountNumber:policy/CloudFormation-Admin-policy
 aws iam attach-user-policy --user-name ekspoc --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess
 aws iam attach-user-policy --user-name ekspoc --policy-arn arn:aws:iam::aws:policy/AmazonRoute53FullAccess
 aws iam attach-user-policy --user-name ekspoc --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess
@@ -63,16 +63,15 @@ aws iam attach-user-policy --user-name ekspoc --policy-arn arn:aws:iam::aws:poli
 
 ```
 
-Create IAM role: 
-``` 
-aws iam create-role --role-name ekspoc 
-```
+Create IAM role and attach below two policy: 
+ 
+AmazonEKSClusterPolicy
+AmazonEKSServicePolicy
 
-Attach existing policy to role :
-
+Command line gives exceed size issue, if someone wants to try command line below:
 ```
-aws iam attach-role-policy --role-name ekspoc --policy-arn arn:aws:iam::aws:policy/AmazonEKSServicePolicy
-aws iam attach-role-policy --role-name ekspoc --policy-arn arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+aws iam create-role --role-name ekspoc --assume-role-policy-document file://AmazonEKSClusterPolicy.json
+aws iam create-role --role-name ekspoc --assume-role-policy-document file://AmazonEKSServicePolicy.json
 ```
 
 Be sure to note the Role ARN, you will need it when creating the Kubernetes cluster in the steps below.

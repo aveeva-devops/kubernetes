@@ -108,6 +108,34 @@ Create EKS using below command
  
  ### Setup CLI tools for EKS cluster
  
+ Download and Install kubectl - https://kubernetes.io/docs/tasks/tools/install-kubectl/
+ Download and install aws-iam-authenticator - https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+ Place both these files in PATH 
+ Configure AWS credentials files to use IAM user created for EKS or Admin user
+ Use aws configure and enter ACCESS KEY and Secret KEY
+ 
+ Generate token 
+ 
+ ```
+ aws-iam-authenticator.exe token -i ClusterName | python -m json.tool
+ 
+ ```
+ 
+ note down token from here
+ 
+ #### Configuration file for kubectl
+ 
+ Replace Endpoint URL, Certs, args (Name of cluster), 
+ 
+ Template of Kubeconfig
+ 
+ ```
+ 
+ ```
+ 
+ 
+ 
+ 
  ### References
  https://logz.io/blog/amazon-eks/
  

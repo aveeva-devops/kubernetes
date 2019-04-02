@@ -76,6 +76,8 @@ aws iam create-role --role-name ekspoc --assume-role-policy-document file://Amaz
 
 Be sure to note the Role ARN, you will need it when creating the Kubernetes cluster in the steps below.
 
+For example : arn:aws:iam::AccountNumber:role/ekspoc
+
 
 ### Create AWS Resources VPC
 

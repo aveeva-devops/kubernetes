@@ -92,7 +92,7 @@ https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-
 
 Create VPC:
 ```
-aws cloudformation create-stack --stack-name ekspoc-vpc --template-body file://ekspoc-vpc.yaml --parameters ParameterKey=Name,ParameterValue=ekspocvpc
+aws cloudformation create-stack --stack-name "ekspoc-vpc" --template-url "https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-vpc-sample.yaml"
 ```
 
 Note down VPCId, Security groups and SubnetID's from above step

@@ -17,13 +17,37 @@ aws iam create-policy --policy-name EKS-Admin-policy --policy-document file://Cl
 
 First is EKS-Admin-policy
 ```
-Code Here
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "eks:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+
 ```
 
 Second is CloudFormation-Admin-policy
 
 ```
-Here
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "cloudformation:*"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+
 ```
 
 Attach these policies to user

@@ -11,11 +11,12 @@ This tutorial assumes you have access to the [AWS](https://aws.amazon.com/). Whi
 * [Chapter 3: Create Kubernetes Cluster Using Amazon EKS](docs/Create_EKS_Cluster.md)
 * [Chapter 4: Manage Deployments](docs/Manage_Deployments.md)
 * [Chapter 5: HealthCheck,Labels and PODS](docs/HealthCheck_Labels_and_PODS.md)
-* [Chapter 6: Controllers](docs/Controllers.md)
-* [Chapter 7: Scheduling](docs/Scheduling.md)
-* [Chapter 8: Logging and Monitoring](docs/Logging_Monitoring.md)
-* [Chapter 9: Storage](docs/Storage.md)
-* [Chapter 10: Networking and Secrets](docs/Networking.md)
+* [Chapter 6: Namespace](docs/Namespace.md)
+* [Chapter 7: Controllers](docs/Controllers.md)
+* [Chapter 8: Scheduling](docs/Scheduling.md)
+* [Chapter 9: Logging and Monitoring](docs/Logging_Monitoring.md)
+* [Chapter 10: Storage](docs/Storage.md)
+* [Chapter 11: Networking and Secrets](docs/Networking.md)
 * [Reference](docs/Reference.md)
 
 ### Section 2 - Admin tasks - Cluster Management

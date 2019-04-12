@@ -1,6 +1,6 @@
 ## Chapter 3 : Create Kubernetes Cluster Using Amazon EKS
 
-### Create AWS Resources - IAM
+### 1. Create AWS Resources - IAM
 
 Create IAM user: This is used we will be using to create AWS resources 
 
@@ -79,7 +79,7 @@ Be sure to note the Role ARN, you will need it when creating the Kubernetes clus
 For example : arn:aws:iam::AccountNumber:role/ekspoc
 
 
-### Create AWS Resources VPC
+### 2. Create AWS Resources VPC
 
 We will create VPC using existing CFT provided by amazon
 
@@ -97,7 +97,7 @@ aws cloudformation create-stack --stack-name "ekspoc-vpc" --template-url "https:
 
 Note down VPCId, Security groups and SubnetID's from above step
 
-### Create EKS Cluster
+### 3. Create EKS Cluster
 
 Create EKS using below command
  
@@ -149,9 +149,12 @@ aws eks delete-cluster --name ekspoc
 
 To access eks cluster, setup CI tools and configure with newly created eks cluster
 
-### Setup CLI tools for EKS cluster
+### 4. Setup CLI tools for EKS cluster
 
 Once the status changes to “ACTIVE”, we can proceed with updating our kubeconfig file with the information on the new cluster so kubectl can communicate with it.
+
+$ aws-iam-authenticator help
+A tool to authenticate to Kubernetes using AWS IAM credentials
 
 To do this, we will use the AWS CLI update-kubeconfig command (be sure to replace the region and cluster name to fit your configurations):
 
@@ -179,7 +182,7 @@ added new context arn:aws:eks:us-east-1:account:cluster/ekspoc to /Users/user/.k
  
  note down token from here
  
- #### Configuration file for kubectl
+ #### 5. Configuration file for kubectl
  
  Replace Endpoint URL, Certs, args (Name of cluster), 
  
@@ -213,8 +216,9 @@ users:
 
  ```
  
- ### Launch the k8s EC2 worker nodes
+ ### 6. Launch the k8s EC2 worker nodes
  
+ ### 7. Deploy application on eks cluster
  
  
  ### References

@@ -163,4 +163,5 @@ users:
  
  ### References
  https://logz.io/blog/amazon-eks/
+ https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html
  

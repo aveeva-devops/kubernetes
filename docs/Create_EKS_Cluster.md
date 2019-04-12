@@ -106,13 +106,69 @@ Create EKS using below command
  
  ```
  
- ### Setup CLI tools for EKS cluster
+ Above step will create eks cluster and display below output
  
- Download and Install kubectl - https://kubernetes.io/docs/tasks/tools/install-kubectl/
- Download and install aws-iam-authenticator - https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
- Place both these files in PATH 
- Configure AWS credentials files to use IAM user created for EKS or Admin user
- Use aws configure and enter ACCESS KEY and Secret KEY
+ ```
+ {
+    "cluster": {
+        "name": "ekspoc",
+        "arn": "arn:aws:eks:us-east-1:account:cluster/ekspoc",
+        "createdAt": 1555033659.174,
+        "version": "1.12",
+        "roleArn": "arn:aws:iam::account:role/ekspoc",
+        "resourcesVpcConfig": {
+            "subnetIds": [
+                "subnet-0138cd554f0",
+                "subnet-0e79e96f"
+            ],
+            "securityGroupIds": [
+                "sg-0d0feee0c2f"
+            ],
+            "vpcId": "vpc-01bdccd9"
+        },
+        "status": "CREATING",
+        "certificateAuthority": {},
+        "platformVersion": "eks.1"
+    }
+}
+
+```
+
+It takes about 5 minutes before your cluster is created. You can ping the status of the command using this CLI command:
+
+```
+aws eks --region us-east-1 describe-cluster --name ekspoc --query cluster.status
+
+```
+
+To delete the cluster, use
+
+```
+aws eks delete-cluster --name ekspoc
+```
+
+To access eks cluster, setup CI tools and configure with newly created eks cluster
+
+### Setup CLI tools for EKS cluster
+
+Once the status changes to “ACTIVE”, we can proceed with updating our kubeconfig file with the information on the new cluster so kubectl can communicate with it.
+
+To do this, we will use the AWS CLI update-kubeconfig command (be sure to replace the region and cluster name to fit your configurations):
+
+```
+aws eks --region us-east-1 update-kubeconfig --name ekspoc
+```
+
+You should see following output
+```
+added new context arn:aws:eks:us-east-1:account:cluster/ekspoc to /Users/user/.kube/config
+```
+ 
+ * Download and Install kubectl - https://kubernetes.io/docs/tasks/tools/install-kubectl/
+ * Download and install aws-iam-authenticator - https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
+ * Place both these files in PATH 
+ * Configure AWS credentials files to use IAM user created for EKS or Admin user
+ * Use aws configure and enter ACCESS KEY and Secret KEY
  
  Generate token 
  

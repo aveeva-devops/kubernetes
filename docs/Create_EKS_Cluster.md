@@ -2,7 +2,7 @@
 
 ### 1. Create AWS Resources - IAM
 
-Create IAM user: This is used we will be using to create AWS resources 
+Create IAM user
 
 ```
 aws iam create-user --user-name ekspoc
@@ -13,6 +13,7 @@ Create two additional EKS Policies
 ```
 aws iam create-policy --policy-name EKS-Admin-policy --policy-document file://EKS-Admin-policy.json
 aws iam create-policy --policy-name CloudFormation-Admin-policy --policy-document file://CloudFormation-Admin-policy.json
+
 ```
 
 First is EKS-Admin-policy
@@ -50,7 +51,7 @@ Second is CloudFormation-Admin-policy
 
 ```
 
-Attach these policies to user
+Attach these policies to the user
 
 ```
 aws iam attach-user-policy --user-name ekspoc --policy-arn arn:aws:iam::AccountNumber:policy/EKS-Admin-policy
@@ -68,7 +69,8 @@ Create IAM role and attach below two policy:
 AmazonEKSClusterPolicy
 AmazonEKSServicePolicy
 
-Command line gives exceed size issue, if someone wants to try command line below:
+Download JSON file for these policies from AWS and execute below commands or apply then via AWS console:
+
 ```
 aws iam create-role --role-name ekspoc --assume-role-policy-document file://AmazonEKSClusterPolicy.json
 aws iam create-role --role-name ekspoc --assume-role-policy-document file://AmazonEKSServicePolicy.json
@@ -79,7 +81,7 @@ Be sure to note the Role ARN, you will need it when creating the Kubernetes clus
 For example : arn:aws:iam::AccountNumber:role/ekspoc
 
 
-### 2. Create AWS Resources VPC
+### 2. Create AWS Resources - VPC
 
 We will create VPC using existing CFT provided by amazon
 
@@ -99,7 +101,7 @@ Note down VPCId, Security groups and SubnetID's from above step
 
 ### 3. Create EKS Cluster
 
-Create EKS using below command
+Create EKS using below command, and provide VPCId, Security groups and SubnetID's created in step #2
  
  ```
  aws eks create-cluster --name ekspoc --role-arn arn:aws:iam::012345678910:role/ekspoc --resources-vpc-config subnetIds=subnet-6782e71e,subnet-e7e761ac,securityGroupIds=sg-6979fe18

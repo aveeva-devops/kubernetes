@@ -102,7 +102,7 @@ Note down VPCId, Security groups and SubnetID's from above step
 Create EKS using below command
  
  ```
- aws eks create-cluster --name ekspoc --role-arn arn:aws:iam::012345678910:role/eks-service-role-AWSServiceRoleForAmazonEKS-J7ONKE3BQ4PI --resources-vpc-config subnetIds=subnet-6782e71e,subnet-e7e761ac,securityGroupIds=sg-6979fe18
+ aws eks create-cluster --name ekspoc --role-arn arn:aws:iam::012345678910:role/ekspoc --resources-vpc-config subnetIds=subnet-6782e71e,subnet-e7e761ac,securityGroupIds=sg-6979fe18
  
  ```
  
@@ -151,10 +151,13 @@ To access eks cluster, setup CI tools and configure with newly created eks clust
 
 ### 4. Setup CLI tools for EKS cluster
 
-Once the status changes to “ACTIVE”, we can proceed with updating our kubeconfig file with the information on the new cluster so kubectl can communicate with it.
+* Configure aws-iam-authenticator - A tool to authenticate to Kubernetes using AWS IAM credentials
+* Download and configure aws-iam-authenticator 
+** https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html 
+* Configure kubectl 
+** https://kubernetes.io/docs/tasks/tools/install-kubectl/ 
 
-$ aws-iam-authenticator help
-A tool to authenticate to Kubernetes using AWS IAM credentials
+Once the status changes to “ACTIVE”, we can proceed with updating our kubeconfig file with the information on the new cluster so kubectl can communicate with it.
 
 To do this, we will use the AWS CLI update-kubeconfig command (be sure to replace the region and cluster name to fit your configurations):
 
@@ -166,21 +169,61 @@ You should see following output
 ```
 added new context arn:aws:eks:us-east-1:account:cluster/ekspoc to /Users/user/.kube/config
 ```
- 
- * Download and Install kubectl - https://kubernetes.io/docs/tasks/tools/install-kubectl/
- * Download and install aws-iam-authenticator - https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html
- * Place both these files in PATH 
- * Configure AWS credentials files to use IAM user created for EKS or Admin user
- * Use aws configure and enter ACCESS KEY and Secret KEY
- 
- Generate token 
- 
- ```
- aws-iam-authenticator.exe token -i ClusterName | python -m json.tool
- 
- ```
- 
- note down token from here
+
+Check status of cluster:
+
+```
+kubectl get svc
+```
+
+Given aws-iam-authenticator is in path, configured correctly and kubeconfig is updated with cluster name, you should see below output
+
+```
+NAME         TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+kubernetes   ClusterIP   10.100.0.1   <none>        443/TCP   80m
+
+```
+
+### 5. Launching Kubernetes worker nodes
+Now that we’ve set up our cluster and VPC networking, we can now launch Kubernetes worker nodes. To do this, we will again use a CloudFormation template.
+
+Follow steps mentioned at https://logz.io/blog/amazon-eks/
+
+Note down ARN of worker nodes
+
+Download aws-auth-cm.yaml
+```
+curl -O https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/aws-auth-cm.yaml 
+```
+
+Update ARN role of worker nodes in aws-auth-cm.yaml and deploy in cluster
+
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-auth
+  namespace: kube-system
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::Account:role/ekspoc-worker-node-NodeInstanceRole-1NYSOJ5910EPV
+      username: system:node:{{EC2PrivateDNSName}}
+      groups:
+        - system:bootstrappers
+        - system:nodes
+```
+
+Once ARN is updated, apply above configmap:
+
+```
+kubectl apply -f aws-auth-cm.yaml
+```
+
+You should see below output
+
+```
+configmap/aws-auth created
+```
  
  #### 5. Configuration file for kubectl
  
@@ -216,7 +259,12 @@ users:
 
  ```
  
- ### 6. Launch the k8s EC2 worker nodes
+ Check status of cluster, nodes should be part of cluster now
+ 
+ ```
+ kubectl get nodes --watch
+ ```
+
  
  ### 7. Deploy application on eks cluster
  

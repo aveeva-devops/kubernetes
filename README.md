@@ -27,7 +27,8 @@ This tutorial assumes you have access to the [AWS](https://aws.amazon.com/). Whi
 * [Chapter 5: Kubernetes Dashboard](https://github.com/kubernetes/dashboard)
 
 
-### Section 3 - Amazon EKS setup 
+### Section 3 - Amazon EKS  
 
 * [Chapter 1: Create Kubernetes Cluster Using Amazon EKS](docs/Create_EKS_Cluster.md)
+* [Chapter 2: EKS and HashiCorp Vault](docs/EKS_Vault.md)
 

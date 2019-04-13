@@ -12,19 +12,9 @@ This tutorial assumes you have access to the [AWS](https://aws.amazon.com/). Whi
 * [Chapter 4: HealthCheck,Labels and PODS](docs/HealthCheck_Labels_and_PODS.md)
 * [Chapter 5: Namespace](docs/Namespace.md)
 * [Chapter 6: Controllers](docs/Controllers.md)
-* [Chapter 7: Scheduling](docs/Scheduling.md)
 * [Reference](docs/Reference.md)
 
-### Section 2 - Admin tasks - Cluster Management
-
-* [Chapter 1: Core Concepts](docs/Core_Concepts.md)
-* [Chapter 2: Installation, Configuration & Validation](docs/Installation_Configuration_Validation.md)
-* [Chapter 3: Security](docs/Security.md)
-* [Chapter 4: Cluster Maintenance](docs/Cluster_Maintenance.md)
-* [Chapter 5: Kubernetes Dashboard](https://github.com/kubernetes/dashboard)
-
-
-### Section 3 - Amazon EKS  
+### Section 2 -  Amazon EKS  
 
 * [Chapter 1: Create Kubernetes Cluster Using Amazon EKS](docs/Create_EKS_Cluster.md)
 * [Chapter 2: EKS and HashiCorp Vault](docs/EKS_Vault.md)

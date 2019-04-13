@@ -225,49 +225,15 @@ You should see below output
 configmap/aws-auth created
 ```
  
- #### 5. Configuration file for kubectl
- 
- Replace Endpoint URL, Certs, args (Name of cluster), 
- 
- Template of Kubeconfig
- 
- ```
- apiVersion: v1
-clusters:
-- cluster:
-    server: <endpoint-url>
-    certificate-authority-data: <base64-encoded-ca-cert>
-  name: kubernetes
-contexts:
-- context:
-    cluster: kubernetes
-    user: aws
-  name: aws
-current-context: aws
-kind: Config
-preferences: {}
-users:
-- name: aws
-  user:
-    exec:
-      apiVersion: client.authentication.k8s.io/v1alpha1
-      command: aws-iam-authenticator
-      args:
-        - "token"
-        - "-i"
-        - "EKS-cluster"
-
- ```
- 
  Check status of cluster, nodes should be part of cluster now
  
  ```
  kubectl get nodes --watch
  ```
 
- 
  ### 7. Deploy application on eks cluster
  
+ Refer - https://github.com/aveeva-devops/kubernetes/blob/master/docs/Manage_Deployments.md
  
  ### References
  https://logz.io/blog/amazon-eks/

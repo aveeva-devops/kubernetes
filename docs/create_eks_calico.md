@@ -35,6 +35,7 @@ daemonset.extensions "calico-node" deleted
 
 ### Create Network Policy:
 
+https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/
 
 
 #### Reference

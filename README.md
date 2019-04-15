@@ -17,6 +17,6 @@ This tutorial assumes you have access to the [AWS](https://aws.amazon.com/). Whi
 ### Section 2 -  Amazon EKS  
 
 * [Chapter 1: Create Kubernetes Cluster Using Amazon EKS](docs/Create_EKS_Cluster.md)
-* [Chapter 2: Calico on Amazon EKS] (docs/create_eks_calico.md)
+* [Chapter 2: Calico on Amazon EKS](docs/create_eks_calico.md)
 * [Chapter 3: EKS and HashiCorp Vault](docs/EKS_Vault.md)
 

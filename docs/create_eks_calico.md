@@ -50,7 +50,7 @@ spec:
   podSelector: {}
   ingress: []
 
-# Allow ingress to nginx controller
+# Allow ingress to webapp 
 ---
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1

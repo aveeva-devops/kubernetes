@@ -89,9 +89,7 @@ metadata:
     name: deny-external-egress
     namespace: {{namespace}}
 spec:
-  podSelector:
-    matchExpressions:
-     - {key: app, operator: In, values: [app1, app2]}
+  podSelector: {}
   policyTypes:
   - Egress
   egress:

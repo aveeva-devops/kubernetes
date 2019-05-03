@@ -191,6 +191,36 @@ Now that we’ve set up our cluster and VPC networking, we can now launch Kubern
 
 Follow steps mentioned at https://logz.io/blog/amazon-eks/
 
+##### Create worker nodes
+
+Open CloudFormation, click Create Stack, and this time use the following template URL:
+
+```
+https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-nodegroup.yaml
+```
+Clicking Next, name your stack, and in the EKS Cluster section enter the following details:
+
+ClusterName – the name of your Kubernetes cluster (e.g. demo)
+ClusterControlPlaneSecurityGroup – the same security group you used for creating the cluster in previous step.
+NodeGroupName – a name for your node group.
+NodeAutoScalingGroupMinSize – leave as-is. The minimum number of nodes that your worker node Auto Scaling group can scale to.
+NodeAutoScalingGroupDesiredCapacity – leave as-is. The desired number of nodes to scale to when your stack is created.
+NodeAutoScalingGroupMaxSize – leave as-is. The maximum number of nodes that your worker node Auto Scaling group can scale out to.
+NodeInstanceType – leave as-is. The instance type used for the worker nodes.
+NodeImageId – the Amazon EKS worker node AMI ID for the region you’re using. For us-east-1, for example: ami-0c5b63ec54dd3fc38
+KeyName – the name of an Amazon EC2 SSH key pair for connecting with the worker nodes once they launch.
+BootstrapArguments – leave empty. This field can be used to pass optional arguments to the worker nodes bootstrap script.
+VpcId – enter the ID of the VPC you created in Step 2 above.
+Subnets – select the three subnets you created in Step 2 above.
+
+
+Proceed to the Review page, select the check-box at the bottom of the page acknowledging that the stack might create IAM resources, and click Create.
+
+CloudFormation creates the worker nodes with the VPC settings we entered — three new EC2 instances are created using the
+
+As before, once the stack is created, open Outputs tab:
+
+
 Note down ARN of worker nodes
 
 Download aws-auth-cm.yaml
@@ -236,6 +266,8 @@ configmap/aws-auth created
  ### 7. Deploy application on eks cluster
  
  Refer - https://github.com/aveeva-devops/kubernetes/blob/master/docs/Manage_Deployments.md
+ 
+ This will take some time to deploy 
  
  ### References
  https://logz.io/blog/amazon-eks/

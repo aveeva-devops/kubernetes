@@ -193,7 +193,7 @@ Follow steps mentioned at https://logz.io/blog/amazon-eks/
 
 ##### Create worker nodes
 
-Open CloudFormation, click Create Stack, and this time use the following template URL:
+Open CloudFormation, click Create Stack, and use the following template URL:
 
 ```
 https://amazon-eks.s3-us-west-2.amazonaws.com/cloudformation/2019-01-09/amazon-eks-nodegroup.yaml
@@ -214,7 +214,7 @@ VpcId – enter the ID of the VPC you created in Step 2 above.
 Subnets – select the three subnets you created in Step 2 above.
 
 
-Proceed to the Review page, select the check-box at the bottom of the page acknowledging that the stack might create IAM resources, and click Create.
+Proceed to the Review page, select the check-box at the bottom of the page acknowledging that the stack might create IAM resources, and click Create. Please note that you don't need to provide security group because you are using AWS VPC template to create VPC, and that VPC has prebuilt security groups which can talk to EKS cluster.
 
 CloudFormation creates the worker nodes with the VPC settings we entered — three new EC2 instances are created using the
 

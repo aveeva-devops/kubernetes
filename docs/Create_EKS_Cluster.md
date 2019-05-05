@@ -276,6 +276,62 @@ configmap/aws-auth created
  
  Refer - https://github.com/aveeva-devops/kubernetes/blob/master/docs/Manage_Deployments.md
  
+Once worker nodes are part of cluster, deploy below manifest file
+ Save below manifest as deploy.yaml
+ 
+ ```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kubernetes
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello-kubernetes
+  template:
+    metadata:
+      labels:
+        app: hello-kubernetes
+    spec:
+      containers:
+      - name: hello-kubernetes
+        image: aveevadevopsr/hello-kubernetes:1.5
+        ports:
+        - containerPort: 8080
+ ```
+ 
+ Deploy using:
+ 
+ ```
+ kubectl apply -f deploy.yaml
+ ```
+ 
+ Once file is created. Deploy application and expose it publicly using service given below. 
+ 
+ ```
+ kubectl apply -f service.yaml
+ 
+ ```
+ 
+ Contents of Service are:
+ ```
+ apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kubernetes
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: hello-kubernetes
+```
+ 
+ 
+ 
+ 
  This will take some time to deploy 
  
  ### References

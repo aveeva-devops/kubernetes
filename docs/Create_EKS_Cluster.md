@@ -1,5 +1,14 @@
 ## Chapter 3 : Create Kubernetes Cluster Using Amazon EKS
 
+This chapter will cover below topics
+
+1. Create AWS Resources - IAM for eks cluster
+2. Create AWS Resources - VPC
+3. Create EKS Cluster
+4. Setup CLI tools for EKS cluster
+5. Launching Kubernetes worker nodes
+6. Deploy application on eks cluster
+
 ### 1. Create AWS Resources - IAM
 
 Create IAM user
@@ -263,7 +272,7 @@ configmap/aws-auth created
  kubectl get nodes --watch
  ```
 
- ### 7. Deploy application on eks cluster
+ ### 6. Deploy application on eks cluster
  
  Refer - https://github.com/aveeva-devops/kubernetes/blob/master/docs/Manage_Deployments.md
  
